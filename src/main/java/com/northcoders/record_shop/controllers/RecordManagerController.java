@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,12 @@ public class RecordManagerController {
     public ResponseEntity<List<RecordModel>> getAllRecords() {
         List<RecordModel> records = recordManagerService.getAllRecords();
         return new ResponseEntity<>(records, HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<RecordModel> getRecordById(@PathVariable Long id) {
+        RecordModel record = recordManagerService.getRecordById(id);
+        return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
 }
