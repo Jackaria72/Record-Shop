@@ -7,4 +7,5 @@ import java.util.List;
 public interface RecordManagerService {
 
     List<RecordModel> getAllRecords();
+    RecordModel getRecordById(Long id);
 }

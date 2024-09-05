@@ -20,4 +20,9 @@ public class RecordManagerServiceImpl implements RecordManagerService {
         recordManagerRepository.findAll().forEach(allRecords::add);
         return allRecords;
     }
+
+    @Override
+    public RecordModel getRecordById(Long id) {
+        return null;
+    }
 }
