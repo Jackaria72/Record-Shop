@@ -1,4 +1,4 @@
-package model;
+package com.northcoders.record_shop.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,9 +21,6 @@ public @Data class RecordModel {
 
     @Column
     String albumName;
-
-    @Column
-    String description;
 
     @Column
     String artist;

@@ -1,6 +1,6 @@
-package service;
+package com.northcoders.record_shop.service;
 
-import model.RecordModel;
+import com.northcoders.record_shop.model.RecordModel;
 
 import java.util.List;
 

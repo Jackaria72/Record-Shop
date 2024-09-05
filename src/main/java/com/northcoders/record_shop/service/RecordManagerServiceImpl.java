@@ -1,9 +1,9 @@
-package service;
+package com.northcoders.record_shop.service;
 
-import model.RecordModel;
+import com.northcoders.record_shop.repository.RecordManagerRepository;
+import com.northcoders.record_shop.model.RecordModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.RecordManagerRepository;
 
 import java.util.ArrayList;
 import java.util.List;

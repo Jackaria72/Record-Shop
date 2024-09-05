@@ -1,6 +1,7 @@
-package controllers;
+package com.northcoders.record_shop.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.northcoders.record_shop.controllers.RecordManagerController;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -9,9 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import service.RecordManagerServiceImpl;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.northcoders.record_shop.service.RecordManagerServiceImpl;
 
 @AutoConfigureMockMvc
 @SpringBootTest

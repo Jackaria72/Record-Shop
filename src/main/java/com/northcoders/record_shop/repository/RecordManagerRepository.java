@@ -1,6 +1,6 @@
-package repository;
+package com.northcoders.record_shop.repository;
 
-import model.RecordModel;
+import com.northcoders.record_shop.model.RecordModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
