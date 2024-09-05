@@ -26,6 +26,5 @@ class RecordManagerRepositoryTest {
 
         // Assert
         assertThat(records).hasSize(1);
-
     }
 }
