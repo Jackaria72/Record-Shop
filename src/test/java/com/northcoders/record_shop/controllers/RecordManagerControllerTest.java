@@ -67,4 +67,19 @@ class RecordManagerControllerTest {
 
     }
 
+    @Test
+    public void testGetByIdReturnsRecord() throws Exception {
+
+        Long testId = 1L;
+        RecordModel test1 = new RecordModel(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+
+        when(mockRecordServiceImpl.getRecordById(testId)).thenReturn(test1);
+
+        this.mockMvcController.perform(
+                MockMvcRequestBuilders.get("/api/v1/record/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.albumName").value("Vol.3: The Subliminal Verses"));
+    }
+
 }
