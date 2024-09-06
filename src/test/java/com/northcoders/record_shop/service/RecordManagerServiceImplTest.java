@@ -69,4 +69,17 @@ class RecordManagerServiceImplTest {
 
         assertThat(actualResult).isEqualTo(test1);
     }
+    @Test
+    public void testUpdateAlbum() {
+        Long id = 1L;
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+
+        when(mockRecordManagerRepository.findById(id)).thenReturn(Optional.of(test1));
+        when(mockRecordManagerRepository.save(test1)).thenReturn(test1);
+
+        Album result = recordManagerServiceImpl.updateAlbumById(test1, id);
+
+        assertThat(result).isEqualTo(test1);
+
+    }
 }
