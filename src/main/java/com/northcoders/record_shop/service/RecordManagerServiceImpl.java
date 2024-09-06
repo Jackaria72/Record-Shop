@@ -28,7 +28,7 @@ public class RecordManagerServiceImpl implements RecordManagerService {
         if (record.isPresent()) {
             return record.get();
         } else {
-            throw new RuntimeException(String.format("The record with the id number '%s' cannot be found!", id));
+            throw new RuntimeException(String.format("The Album with the id number '%s' cannot be found!", id));
         }
 
 
@@ -40,7 +40,18 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     }
 
     @Override
-    public Album updateAlbumById(Long id) {
-        return null;
+    public Album updateAlbumById(Album album, Long id) {
+        Album original = getAlbumById(id);
+        if (original != null) {
+            original.setAlbumName(album.getAlbumName());
+            original.setArtist(album.getArtist());
+            original.setGenre(album.getGenre());
+            original.setReleaseYear(album.getReleaseYear());
+            original.setQuantityInStock(album.getQuantityInStock());
+
+            return recordManagerRepository.save(original);
+        } else {
+            throw new RuntimeException(String.format("The Album with the id number '%s' cannot be found!", id));
+        }
     }
 }
