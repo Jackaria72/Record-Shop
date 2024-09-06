@@ -16,14 +16,14 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     RecordManagerRepository recordManagerRepository;
 
     @Override
-    public List<Album> getAllRecords() {
+    public List<Album> getAllAlbums() {
         List<Album> allRecords = new ArrayList<>();
         recordManagerRepository.findAll().forEach(allRecords::add);
         return allRecords;
     }
 
     @Override
-    public Album getRecordById(Long id) {
+    public Album getAlbumById(Long id) {
         Optional<Album> record = recordManagerRepository.findById(id);
         if (record.isPresent()) {
             return record.get();
@@ -35,7 +35,7 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     }
 
     @Override
-    public Album insertRecord(Album record) {
+    public Album insertAlbum(Album record) {
         return recordManagerRepository.save(record);
     }
 }

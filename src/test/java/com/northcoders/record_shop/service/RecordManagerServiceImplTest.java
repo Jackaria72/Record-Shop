@@ -24,7 +24,7 @@ class RecordManagerServiceImplTest {
     private RecordManagerServiceImpl recordManagerServiceImpl;
 
     @Test
-    void testGetAllRecordsReturnsListOfRecords() {
+    void testGetAllAlbumsReturnsListOfAlbums() {
         //Arrange
         List<Album> recordList = new ArrayList<>();
         recordList.add(new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3));
@@ -34,7 +34,7 @@ class RecordManagerServiceImplTest {
 
         when(mockRecordManagerRepository.findAll()).thenReturn(recordList);
 
-        List<Album> expectedResult = recordManagerServiceImpl.getAllRecords();
+        List<Album> expectedResult = recordManagerServiceImpl.getAllAlbums();
 
         assertThat(expectedResult).hasSize(4);
         assertThat(expectedResult).isEqualTo(recordList);
@@ -42,7 +42,7 @@ class RecordManagerServiceImplTest {
     }
 
     @Test
-    void testGetByIdGetsBook() {
+    void testGetByIdGetsAlbum() {
 
         Long id1 = 1L;
 
@@ -53,19 +53,19 @@ class RecordManagerServiceImplTest {
 
         when(mockRecordManagerRepository.findById(id1)).thenReturn(Optional.of(test1));
 
-        Album result = recordManagerServiceImpl.getRecordById(id1);
+        Album result = recordManagerServiceImpl.getAlbumById(id1);
 
         assertThat(result).isEqualTo(test1);
 
     }
     @Test
-    public void testAddARecord() {
+    public void testAddAlbum() {
 
         Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
 
         when(mockRecordManagerRepository.save(test1)).thenReturn(test1);
 
-        Album actualResult = recordManagerServiceImpl.insertRecord(test1);
+        Album actualResult = recordManagerServiceImpl.insertAlbum(test1);
 
         assertThat(actualResult).isEqualTo(test1);
     }

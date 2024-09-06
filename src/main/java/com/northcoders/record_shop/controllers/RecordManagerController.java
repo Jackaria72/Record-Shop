@@ -11,29 +11,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/record")
+@RequestMapping("/api/v1/album")
 public class RecordManagerController {
 
     @Autowired
     RecordManagerService recordManagerService;
 
-    @GetMapping("/all-records")
-    public ResponseEntity<List<Album>> getAllRecords() {
-        List<Album> records = recordManagerService.getAllRecords();
+    @GetMapping("/all-albums")
+    public ResponseEntity<List<Album>> getAllAlbums() {
+        List<Album> records = recordManagerService.getAllAlbums();
         return new ResponseEntity<>(records, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Album> getRecordById(@PathVariable Long id) {
-        Album record = recordManagerService.getRecordById(id);
+    public ResponseEntity<Album> getAlbumById(@PathVariable Long id) {
+        Album record = recordManagerService.getAlbumById(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Album> addBook(@RequestBody Album record) {
-        Album newRecord = recordManagerService.insertRecord(record);
+    public ResponseEntity<Album> addAlbum(@RequestBody Album record) {
+        Album newRecord = recordManagerService.insertAlbum(record);
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("record", "/api/v1/record" + newRecord.getId().toString());
+        httpHeaders.add("album", "/api/v1/album" + newRecord.getId().toString());
         return new ResponseEntity<>(newRecord, httpHeaders, HttpStatus.CREATED);
     }
 

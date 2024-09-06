@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RecordManagerService {
 
-    List<Album> getAllRecords();
-    Album getRecordById(Long id);
-    Album insertRecord(Album record);
+    List<Album> getAllAlbums();
+    Album getAlbumById(Long id);
+    Album insertAlbum(Album record);
 }

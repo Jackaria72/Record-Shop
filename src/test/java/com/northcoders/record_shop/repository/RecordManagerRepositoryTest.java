@@ -14,7 +14,7 @@ class RecordManagerRepositoryTest {
     private RecordManagerRepository recordManagerRepository;
 
     @Test
-    public void testFindAllRecordModelReturnsRecordModel() {
+    public void testFindAllAlbumsReturnsAlbums() {
 
         // Arrange
         Album record1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
@@ -28,7 +28,7 @@ class RecordManagerRepositoryTest {
     }
 
     @Test
-    public void testFindRecordByIdReturnsRecord() {
+    public void testFindAlbumByIdReturnsAlbum() {
         Album record = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
         recordManagerRepository.save(record);
 

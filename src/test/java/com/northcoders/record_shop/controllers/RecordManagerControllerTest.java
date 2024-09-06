@@ -43,7 +43,7 @@ class RecordManagerControllerTest {
     }
 
     @Test
-    public void testGetAllRecordsReturnsRecords() throws Exception {
+    public void testGetAllAlbumsReturnsAlbums() throws Exception {
 
         List<Album> recordList = new ArrayList<>();
         recordList.add(new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3));
@@ -51,10 +51,10 @@ class RecordManagerControllerTest {
         recordList.add(new Album(3L, "Nevermind", "Nirvana", "Grunge", 1991, 35));
         recordList.add(new Album(4L, "Enema Of The State", "blink-182", "pop-punk", 1999, 1));
 
-        when(mockRecordServiceImpl.getAllRecords()).thenReturn(recordList);
+        when(mockRecordServiceImpl.getAllAlbums()).thenReturn(recordList);
 
         this.mockMvcController.perform(
-                MockMvcRequestBuilders.get("/api/v1/record/all-records"))
+                MockMvcRequestBuilders.get("/api/v1/album/all-albums"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].albumName").value("Vol.3: The Subliminal Verses"))
@@ -68,34 +68,34 @@ class RecordManagerControllerTest {
     }
 
     @Test
-    public void testGetByIdReturnsRecord() throws Exception {
+    public void testGetByIdReturnsAlbum() throws Exception {
 
         Long testId = 1L;
         Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
 
-        when(mockRecordServiceImpl.getRecordById(testId)).thenReturn(test1);
+        when(mockRecordServiceImpl.getAlbumById(testId)).thenReturn(test1);
 
         this.mockMvcController.perform(
-                MockMvcRequestBuilders.get("/api/v1/record/1"))
+                MockMvcRequestBuilders.get("/api/v1/album/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.albumName").value("Vol.3: The Subliminal Verses"));
     }
 
     @Test
-    public void testPostMappingAddARecord() throws Exception {
+    public void testPostMappingAddAnAlbum() throws Exception {
 
         Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
 
-        when(mockRecordServiceImpl.insertRecord(test1)).thenReturn(test1);
+        when(mockRecordServiceImpl.insertAlbum(test1)).thenReturn(test1);
 
         this.mockMvcController.perform(
-                MockMvcRequestBuilders.post("/api/v1/record")
+                MockMvcRequestBuilders.post("/api/v1/album")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(test1)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
 
-        verify(mockRecordServiceImpl, times(1)).insertRecord(test1);
+        verify(mockRecordServiceImpl, times(1)).insertAlbum(test1);
 
     }
 
