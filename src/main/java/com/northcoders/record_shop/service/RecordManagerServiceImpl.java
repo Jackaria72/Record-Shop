@@ -38,4 +38,9 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     public Album insertAlbum(Album record) {
         return recordManagerRepository.save(record);
     }
+
+    @Override
+    public Album updateAlbumById(Long id) {
+        return null;
+    }
 }
