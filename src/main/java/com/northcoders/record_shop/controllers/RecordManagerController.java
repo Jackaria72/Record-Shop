@@ -1,6 +1,6 @@
 package com.northcoders.record_shop.controllers;
 
-import com.northcoders.record_shop.model.RecordModel;
+import com.northcoders.record_shop.model.Album;
 import com.northcoders.record_shop.service.RecordManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,20 +18,20 @@ public class RecordManagerController {
     RecordManagerService recordManagerService;
 
     @GetMapping("/all-records")
-    public ResponseEntity<List<RecordModel>> getAllRecords() {
-        List<RecordModel> records = recordManagerService.getAllRecords();
+    public ResponseEntity<List<Album>> getAllRecords() {
+        List<Album> records = recordManagerService.getAllRecords();
         return new ResponseEntity<>(records, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<RecordModel> getRecordById(@PathVariable Long id) {
-        RecordModel record = recordManagerService.getRecordById(id);
+    public ResponseEntity<Album> getRecordById(@PathVariable Long id) {
+        Album record = recordManagerService.getRecordById(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<RecordModel> addBook(@RequestBody RecordModel record) {
-        RecordModel newRecord = recordManagerService.insertRecord(record);
+    public ResponseEntity<Album> addBook(@RequestBody Album record) {
+        Album newRecord = recordManagerService.insertRecord(record);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("record", "/api/v1/record" + newRecord.getId().toString());
         return new ResponseEntity<>(newRecord, httpHeaders, HttpStatus.CREATED);

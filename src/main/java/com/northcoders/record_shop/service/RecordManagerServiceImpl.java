@@ -1,7 +1,7 @@
 package com.northcoders.record_shop.service;
 
 import com.northcoders.record_shop.repository.RecordManagerRepository;
-import com.northcoders.record_shop.model.RecordModel;
+import com.northcoders.record_shop.model.Album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +16,15 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     RecordManagerRepository recordManagerRepository;
 
     @Override
-    public List<RecordModel> getAllRecords() {
-        List<RecordModel> allRecords = new ArrayList<>();
+    public List<Album> getAllRecords() {
+        List<Album> allRecords = new ArrayList<>();
         recordManagerRepository.findAll().forEach(allRecords::add);
         return allRecords;
     }
 
     @Override
-    public RecordModel getRecordById(Long id) {
-        Optional<RecordModel> record = recordManagerRepository.findById(id);
+    public Album getRecordById(Long id) {
+        Optional<Album> record = recordManagerRepository.findById(id);
         if (record.isPresent()) {
             return record.get();
         } else {
@@ -35,7 +35,7 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     }
 
     @Override
-    public RecordModel insertRecord(RecordModel record) {
+    public Album insertRecord(Album record) {
         return recordManagerRepository.save(record);
     }
 }

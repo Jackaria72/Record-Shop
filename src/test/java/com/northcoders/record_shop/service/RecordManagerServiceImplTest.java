@@ -1,7 +1,6 @@
 package com.northcoders.record_shop.service;
 
-import com.northcoders.record_shop.model.RecordModel;
-import com.northcoders.record_shop.service.RecordManagerServiceImpl;
+import com.northcoders.record_shop.model.Album;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -27,15 +26,15 @@ class RecordManagerServiceImplTest {
     @Test
     void testGetAllRecordsReturnsListOfRecords() {
         //Arrange
-        List<RecordModel> recordList = new ArrayList<>();
-        recordList.add(new RecordModel(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3));
-        recordList.add(new RecordModel(2L, "Follow the Leader", "Korn", "nuMetal", 1998, 2));
-        recordList.add(new RecordModel(3L, "Nevermind", "Nirvana", "Grunge", 1991, 35));
-        recordList.add(new RecordModel(4L, "Enema Of The State", "blink-182", "pop-punk", 1999, 1));
+        List<Album> recordList = new ArrayList<>();
+        recordList.add(new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3));
+        recordList.add(new Album(2L, "Follow the Leader", "Korn", "nuMetal", 1998, 2));
+        recordList.add(new Album(3L, "Nevermind", "Nirvana", "Grunge", 1991, 35));
+        recordList.add(new Album(4L, "Enema Of The State", "blink-182", "pop-punk", 1999, 1));
 
         when(mockRecordManagerRepository.findAll()).thenReturn(recordList);
 
-        List<RecordModel> expectedResult = recordManagerServiceImpl.getAllRecords();
+        List<Album> expectedResult = recordManagerServiceImpl.getAllRecords();
 
         assertThat(expectedResult).hasSize(4);
         assertThat(expectedResult).isEqualTo(recordList);
@@ -47,14 +46,14 @@ class RecordManagerServiceImplTest {
 
         Long id1 = 1L;
 
-        RecordModel test1 = new RecordModel(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
 //        recordList.add(new RecordModel(2L, "Follow the Leader", "Korn", "nuMetal", 1998, 2));
 //        recordList.add(new RecordModel(3L, "Nevermind", "Nirvana", "Grunge", 1991, 35));
 //        recordList.add(new RecordModel(4L, "Enema Of The State", "blink-182", "pop-punk", 1999, 1));
 
         when(mockRecordManagerRepository.findById(id1)).thenReturn(Optional.of(test1));
 
-        RecordModel result = recordManagerServiceImpl.getRecordById(id1);
+        Album result = recordManagerServiceImpl.getRecordById(id1);
 
         assertThat(result).isEqualTo(test1);
 
@@ -62,11 +61,11 @@ class RecordManagerServiceImplTest {
     @Test
     public void testAddARecord() {
 
-        RecordModel test1 = new RecordModel(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
 
         when(mockRecordManagerRepository.save(test1)).thenReturn(test1);
 
-        RecordModel actualResult = recordManagerServiceImpl.insertRecord(test1);
+        Album actualResult = recordManagerServiceImpl.insertRecord(test1);
 
         assertThat(actualResult).isEqualTo(test1);
     }

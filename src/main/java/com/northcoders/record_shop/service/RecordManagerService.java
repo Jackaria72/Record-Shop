@@ -1,12 +1,12 @@
 package com.northcoders.record_shop.service;
 
-import com.northcoders.record_shop.model.RecordModel;
+import com.northcoders.record_shop.model.Album;
 
 import java.util.List;
 
 public interface RecordManagerService {
 
-    List<RecordModel> getAllRecords();
-    RecordModel getRecordById(Long id);
-    RecordModel insertRecord(RecordModel record);
+    List<Album> getAllRecords();
+    Album getRecordById(Long id);
+    Album insertRecord(Album record);
 }

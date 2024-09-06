@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public @Data class RecordModel {
+public @Data class Album {
 
     @Id
     @GeneratedValue

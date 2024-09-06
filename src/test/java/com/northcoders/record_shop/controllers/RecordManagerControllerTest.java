@@ -1,8 +1,7 @@
 package com.northcoders.record_shop.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.northcoders.record_shop.controllers.RecordManagerController;
-import com.northcoders.record_shop.model.RecordModel;
+import com.northcoders.record_shop.model.Album;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -45,11 +44,11 @@ class RecordManagerControllerTest {
     @Test
     public void testGetAllRecordsReturnsRecords() throws Exception {
 
-        List<RecordModel> recordList = new ArrayList<>();
-        recordList.add(new RecordModel(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3));
-        recordList.add(new RecordModel(2L, "Follow the Leader", "Korn", "nuMetal", 1998, 2));
-        recordList.add(new RecordModel(3L, "Nevermind", "Nirvana", "Grunge", 1991, 35));
-        recordList.add(new RecordModel(4L, "Enema Of The State", "blink-182", "pop-punk", 1999, 1));
+        List<Album> recordList = new ArrayList<>();
+        recordList.add(new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3));
+        recordList.add(new Album(2L, "Follow the Leader", "Korn", "nuMetal", 1998, 2));
+        recordList.add(new Album(3L, "Nevermind", "Nirvana", "Grunge", 1991, 35));
+        recordList.add(new Album(4L, "Enema Of The State", "blink-182", "pop-punk", 1999, 1));
 
         when(mockRecordServiceImpl.getAllRecords()).thenReturn(recordList);
 
@@ -71,7 +70,7 @@ class RecordManagerControllerTest {
     public void testGetByIdReturnsRecord() throws Exception {
 
         Long testId = 1L;
-        RecordModel test1 = new RecordModel(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
 
         when(mockRecordServiceImpl.getRecordById(testId)).thenReturn(test1);
 
