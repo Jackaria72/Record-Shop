@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -18,7 +19,7 @@ import com.northcoders.record_shop.service.RecordManagerServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -79,6 +80,23 @@ class RecordManagerControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.albumName").value("Vol.3: The Subliminal Verses"));
+    }
+
+    @Test
+    public void testPostMappingAddARecord() throws Exception {
+
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+
+        when(mockRecordServiceImpl.insertRecord(test1)).thenReturn(test1);
+
+        this.mockMvcController.perform(
+                MockMvcRequestBuilders.post("/api/v1/record")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(test1)))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
+
+        verify(mockRecordServiceImpl, times(1)).insertRecord(test1);
+
     }
 
 }
