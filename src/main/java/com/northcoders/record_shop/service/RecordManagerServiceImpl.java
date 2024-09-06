@@ -33,4 +33,9 @@ public class RecordManagerServiceImpl implements RecordManagerService {
 
 
     }
+
+    @Override
+    public RecordModel insertRecord(RecordModel record) {
+        return null;
+    }
 }

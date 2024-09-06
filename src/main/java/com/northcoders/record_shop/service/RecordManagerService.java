@@ -8,4 +8,5 @@ public interface RecordManagerService {
 
     List<RecordModel> getAllRecords();
     RecordModel getRecordById(Long id);
+    RecordModel insertRecord(RecordModel record);
 }
