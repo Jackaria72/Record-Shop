@@ -36,5 +36,10 @@ public class RecordManagerController {
         httpHeaders.add("album", "/api/v1/album" + newRecord.getId().toString());
         return new ResponseEntity<>(newRecord, httpHeaders, HttpStatus.CREATED);
     }
+    @PutMapping("{id}")
+    public ResponseEntity<Album> updateAlbum(@PathVariable Long id, @RequestBody Album album) {
+        Album update = recordManagerService.updateAlbumById(album, id);
+        return new ResponseEntity<>(update, HttpStatus.NO_CONTENT);
+    }
 
 }
