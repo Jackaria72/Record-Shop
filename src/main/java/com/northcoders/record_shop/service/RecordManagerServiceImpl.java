@@ -54,4 +54,9 @@ public class RecordManagerServiceImpl implements RecordManagerService {
             throw new RuntimeException(String.format("The Album with the id number '%s' cannot be found!", id));
         }
     }
+
+    @Override
+    public void deleteAlbumById(Long id) {
+
+    }
 }

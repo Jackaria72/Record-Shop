@@ -10,4 +10,5 @@ public interface RecordManagerService {
     Album getAlbumById(Long id);
     Album insertAlbum(Album record);
     Album updateAlbumById(Album album, Long id);
+    void deleteAlbumById(Long id);
 }
