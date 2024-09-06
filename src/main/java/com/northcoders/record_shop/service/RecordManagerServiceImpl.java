@@ -57,6 +57,11 @@ public class RecordManagerServiceImpl implements RecordManagerService {
 
     @Override
     public void deleteAlbumById(Long id) {
-
+        Optional<Album> album = recordManagerRepository.findById(id);
+        if (album.isPresent()) {
+            recordManagerRepository.deleteById(id);
+        } else {
+            throw new RuntimeException(String.format("The Album with the id number '%s' cannot be found!", id));
+        }
     }
 }
