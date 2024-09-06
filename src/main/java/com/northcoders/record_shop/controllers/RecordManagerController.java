@@ -41,5 +41,10 @@ public class RecordManagerController {
         Album update = recordManagerService.updateAlbumById(album, id);
         return new ResponseEntity<>(update, HttpStatus.NO_CONTENT);
     }
+    @DeleteMapping("{id}")
+    public ResponseEntity<Album> deleteAlbumById(@PathVariable Long id) {
+        recordManagerService.deleteAlbumById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }
