@@ -98,5 +98,22 @@ class RecordManagerControllerTest {
         verify(mockRecordServiceImpl, times(1)).insertAlbum(test1);
 
     }
+    @Test
+    public void testPutMappingUpdatesAnAlbum() throws Exception {
+
+        Long id = 1L;
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+
+        when(mockRecordServiceImpl.updateAlbumById(test1, id)).thenReturn(test1);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.put("/api/v1/album/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(test1)))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        verify(mockRecordServiceImpl, times(1)).updateAlbumById(test1, id);
+
+    }
 
 }
