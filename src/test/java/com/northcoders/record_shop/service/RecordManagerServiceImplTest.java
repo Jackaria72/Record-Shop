@@ -59,4 +59,15 @@ class RecordManagerServiceImplTest {
         assertThat(result).isEqualTo(test1);
 
     }
+    @Test
+    public void testAddARecord() {
+
+        RecordModel test1 = new RecordModel(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+
+        when(mockRecordManagerRepository.save(test1)).thenReturn(test1);
+
+        RecordModel actualResult = recordManagerServiceImpl.insertRecord(test1);
+
+        assertThat(actualResult).isEqualTo(test1);
+    }
 }
