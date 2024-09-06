@@ -3,12 +3,10 @@ package com.northcoders.record_shop.controllers;
 import com.northcoders.record_shop.model.RecordModel;
 import com.northcoders.record_shop.service.RecordManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,14 @@ public class RecordManagerController {
     public ResponseEntity<RecordModel> getRecordById(@PathVariable Long id) {
         RecordModel record = recordManagerService.getRecordById(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<RecordModel> addBook(@RequestBody RecordModel record) {
+        RecordModel newRecord = recordManagerService.insertRecord(record);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("record", "/api/v1/record" + newRecord.getId().toString());
+        return new ResponseEntity<>(newRecord, httpHeaders, HttpStatus.CREATED);
     }
 
 }
