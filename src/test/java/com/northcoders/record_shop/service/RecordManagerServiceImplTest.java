@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 @DataJpaTest
 class RecordManagerServiceImplTest {
@@ -81,5 +83,17 @@ class RecordManagerServiceImplTest {
 
         assertThat(result).isEqualTo(test1);
 
+    }
+    @Test
+    public void testForDeleteAlbum() {
+        Long testId = 1L;
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+
+        when(mockRecordManagerRepository.findById(testId)).thenReturn(Optional.of(test1));
+        doNothing().when(mockRecordManagerRepository).deleteById(testId);
+
+        recordManagerServiceImpl.deleteAlbumById(testId);
+
+        verify(mockRecordManagerRepository, times(1)).deleteById(testId);
     }
 }
