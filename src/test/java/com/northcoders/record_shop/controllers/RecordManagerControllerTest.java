@@ -115,5 +115,15 @@ class RecordManagerControllerTest {
         verify(mockRecordServiceImpl, times(1)).updateAlbumById(test1, id);
 
     }
+    @Test
+    public void testDeleteMappingDeletesAnAlbum() throws Exception {
+        Long id = 1L;
 
+        doNothing().when(mockRecordServiceImpl).deleteAlbumById(id);
+
+        this.mockMvcController.perform(
+                MockMvcRequestBuilders.delete("/api/v1/album/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
 }
