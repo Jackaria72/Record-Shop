@@ -1,5 +1,6 @@
 package com.northcoders.record_shop.service;
 
+import com.northcoders.record_shop.exception.NotFoundException;
 import com.northcoders.record_shop.repository.RecordManagerRepository;
 import com.northcoders.record_shop.model.Album;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class RecordManagerServiceImpl implements RecordManagerService {
         if (record.isPresent()) {
             return record.get();
         } else {
-            throw new RuntimeException(String.format("The Album with the id number '%s' cannot be found!", id));
+            throw new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", id));
         }
 
 
@@ -51,7 +52,7 @@ public class RecordManagerServiceImpl implements RecordManagerService {
 
             return recordManagerRepository.save(original);
         } else {
-            throw new RuntimeException(String.format("The Album with the id number '%s' cannot be found!", id));
+            throw new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", id));
         }
     }
 
@@ -61,7 +62,7 @@ public class RecordManagerServiceImpl implements RecordManagerService {
         if (album.isPresent()) {
             recordManagerRepository.deleteById(id);
         } else {
-            throw new RuntimeException(String.format("The Album with the id number '%s' cannot be found!", id));
+            throw new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", id));
         }
     }
 }
