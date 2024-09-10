@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "Records")
+@Table(name = "Album")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,7 +23,9 @@ public @Data class Album {
     String albumName;
 
     @Column
-    String artist;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    Artist artist;
 
     @Column
     @Enumerated(EnumType.STRING)
