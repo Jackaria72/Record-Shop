@@ -26,7 +26,13 @@ public @Data class Album {
     String artist;
 
     @Column
-    String genre;
+    SuperGenre genre;
+
+    @Column
+    String albumArt;
+
+    @Column
+    String trackList;
 
     @Column
     int releaseYear;
