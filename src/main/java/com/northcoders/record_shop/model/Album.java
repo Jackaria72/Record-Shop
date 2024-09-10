@@ -26,6 +26,7 @@ public @Data class Album {
     String artist;
 
     @Column
+    @Enumerated(EnumType.STRING)
     SuperGenre genre;
 
     @Column
