@@ -48,6 +48,8 @@ public class RecordManagerServiceImpl implements RecordManagerService {
             update.setAlbumName(album.getAlbumName());
             update.setArtist(album.getArtist());
             update.setGenre(album.getGenre());
+            update.setAlbumArt(album.getAlbumArt());
+            update.setTrackList(album.getTrackList());
             update.setReleaseYear(album.getReleaseYear());
             update.setQuantityInStock(album.getQuantityInStock());
 
