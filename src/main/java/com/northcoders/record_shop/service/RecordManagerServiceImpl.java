@@ -42,15 +42,16 @@ public class RecordManagerServiceImpl implements RecordManagerService {
 
     @Override
     public Album updateAlbumById(Album album, Long id) {
-        Album original = getAlbumById(id);
-        if (original != null) {
-            original.setAlbumName(album.getAlbumName());
-            original.setArtist(album.getArtist());
-            original.setGenre(album.getGenre());
-            original.setReleaseYear(album.getReleaseYear());
-            original.setQuantityInStock(album.getQuantityInStock());
+        Optional<Album> original = recordManagerRepository.findById(id);
+        if (original.isPresent()) {
+            Album update =original.get();
+            update.setAlbumName(album.getAlbumName());
+            update.setArtist(album.getArtist());
+            update.setGenre(album.getGenre());
+            update.setReleaseYear(album.getReleaseYear());
+            update.setQuantityInStock(album.getQuantityInStock());
 
-            return recordManagerRepository.save(original);
+            return recordManagerRepository.save(update);
         } else {
             throw new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", id));
         }
