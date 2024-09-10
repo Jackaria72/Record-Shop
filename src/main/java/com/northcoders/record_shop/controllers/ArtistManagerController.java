@@ -3,13 +3,11 @@ package com.northcoders.record_shop.controllers;
 import com.northcoders.record_shop.model.Artist;
 import com.northcoders.record_shop.service.ArtistManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +28,13 @@ public class ArtistManagerController {
     public ResponseEntity<Artist> getArtistById(@PathVariable Long id) {
         Artist artist = artistManagerService.getArtistById(id);
         return new ResponseEntity<>(artist, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Artist> addArtist(@RequestBody Artist artist) {
+        Artist newArtist = artistManagerService.insertArtist(artist);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("artist", "/api/v1/artist" + newArtist.getId().toString());
+        return new ResponseEntity<>(newArtist, httpHeaders, HttpStatus.OK);
     }
 }

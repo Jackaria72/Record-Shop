@@ -33,4 +33,9 @@ public class ArtistManagerServiceImpl implements ArtistManagerService {
             throw new NotFoundException(String.format("The Artist with the id number '%s' cannot be found!", id));
         }
     }
+
+    @Override
+    public Artist insertArtist(Artist artist) {
+        return artistManagerRepository.save(artist);
+    }
 }
