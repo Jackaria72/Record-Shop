@@ -1,5 +1,6 @@
 package com.northcoders.record_shop.service;
 
+import com.northcoders.record_shop.exception.NotFoundException;
 import com.northcoders.record_shop.model.Album;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -59,6 +61,19 @@ class RecordManagerServiceImplTest {
 
         assertThat(result).isEqualTo(test1);
 
+    }
+    @Test
+    public void testGetById_WhereIdNotFound() {
+        Long id = 1L;
+
+
+        when(mockRecordManagerRepository.findById(id)).thenThrow(new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", id)));
+
+
+
+        assertThrows(NotFoundException.class, () -> recordManagerServiceImpl.getAlbumById(id));
+        verify(mockRecordManagerRepository, times(1)).findById(id);
+        verifyNoMoreInteractions(mockRecordManagerRepository);
     }
     @Test
     public void testAddAlbum() {
