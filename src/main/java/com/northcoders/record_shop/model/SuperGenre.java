@@ -1,0 +1,31 @@
+package com.northcoders.record_shop.model;
+
+public enum SuperGenre {
+    INDUSTRIAL_AND_GOTHIC,
+    HEAVY_METAL,
+    ROCK_N_ROLL,
+    CLASSIC_ROCK,
+    PUNK_WAVE,
+    HARDCORE_PUNK,
+    ALT_ROCK_AND_INDIE,
+    CONTEMPORARY_ROCK,
+    POP_MUSIC,
+    COUNTRY,
+    R_N_B,
+    BLUES,
+    GOSPEL,
+    JAZZ,
+    REGGAE,
+    HIP_HOP,
+    BREAKBEAT,
+    DRUM_N_BASS,
+    HARDCORE_TECHNO,
+    TECHNO,
+    HOUSE,
+    TRANCE,
+    AMBIENT,
+    UTILITY,
+    FOLK,
+    CLASSICAL,
+    WORLD
+}
