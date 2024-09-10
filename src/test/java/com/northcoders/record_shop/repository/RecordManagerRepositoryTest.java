@@ -1,6 +1,7 @@
 package com.northcoders.record_shop.repository;
 
 import com.northcoders.record_shop.model.Album;
+import com.northcoders.record_shop.model.SuperGenre;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,7 +18,7 @@ class RecordManagerRepositoryTest {
     public void testFindAllAlbumsReturnsAlbums() {
 
         // Arrange
-        Album record1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+        Album record1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
         recordManagerRepository.save(record1);
 
         // Act
@@ -29,7 +30,7 @@ class RecordManagerRepositoryTest {
 
     @Test
     public void testFindAlbumByIdReturnsAlbum() {
-        Album record = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", "nuMetal", 2004, 3);
+        Album record = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
         recordManagerRepository.save(record);
 
         Album records = recordManagerRepository.findById(1L).get();
