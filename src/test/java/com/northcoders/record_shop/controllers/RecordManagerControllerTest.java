@@ -1,6 +1,7 @@
 package com.northcoders.record_shop.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.northcoders.record_shop.exception.NotFoundException;
 import com.northcoders.record_shop.model.Album;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -18,18 +21,23 @@ import com.northcoders.record_shop.service.RecordManagerServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import static java.util.Optional.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
 @SpringBootTest
 class RecordManagerControllerTest {
 
-    @Mock
+    @MockBean
     private RecordManagerServiceImpl mockRecordServiceImpl;
 
-    @InjectMocks
-    private RecordManagerController recordManagerController;
+//    @InjectMocks
+//    private RecordManagerController recordManagerController;
 
     @Autowired
     private MockMvc mockMvcController;
@@ -38,7 +46,7 @@ class RecordManagerControllerTest {
 
     @BeforeEach
     public void setup(){
-        mockMvcController = MockMvcBuilders.standaloneSetup(recordManagerController).build();
+      //  mockMvcController = MockMvcBuilders.standaloneSetup(recordManagerController).build();
         mapper = new ObjectMapper();
     }
 
@@ -55,7 +63,7 @@ class RecordManagerControllerTest {
 
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.get("/api/v1/album/all-albums"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].albumName").value("Vol.3: The Subliminal Verses"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].id").value(2))
@@ -67,6 +75,7 @@ class RecordManagerControllerTest {
 
     }
 
+
     @Test
     public void testGetByIdReturnsAlbum() throws Exception {
 
@@ -77,10 +86,21 @@ class RecordManagerControllerTest {
 
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.get("/api/v1/album/1"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.albumName").value("Vol.3: The Subliminal Verses"));
     }
+    @Test
+    public void testGetByIdReturnsNotFoundWhenIdNotFound() throws Exception {
+        Long id = 1L;
+        when(mockRecordServiceImpl.getAlbumById(id)).thenThrow(new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", id)));
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.get("/api/v1/album/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("The Album with the id number '1' cannot be found!"));
+                   }
 
     @Test
     public void testPostMappingAddAnAlbum() throws Exception {
@@ -93,7 +113,7 @@ class RecordManagerControllerTest {
                 MockMvcRequestBuilders.post("/api/v1/album")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(test1)))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
+                .andExpect(status().isCreated());
 
         verify(mockRecordServiceImpl, times(1)).insertAlbum(test1);
 
@@ -110,7 +130,7 @@ class RecordManagerControllerTest {
                         MockMvcRequestBuilders.put("/api/v1/album/1")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(test1)))
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(status().isNoContent());
 
         verify(mockRecordServiceImpl, times(1)).updateAlbumById(test1, id);
 
@@ -124,6 +144,6 @@ class RecordManagerControllerTest {
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.delete("/api/v1/album/1")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(status().isNoContent());
     }
 }
