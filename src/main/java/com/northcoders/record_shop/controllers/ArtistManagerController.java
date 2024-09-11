@@ -35,7 +35,7 @@ public class ArtistManagerController {
         Artist newArtist = artistManagerService.insertArtist(artist);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("artist", "/api/v1/artist" + newArtist.getId().toString());
-        return new ResponseEntity<>(newArtist, httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(newArtist, httpHeaders, HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
