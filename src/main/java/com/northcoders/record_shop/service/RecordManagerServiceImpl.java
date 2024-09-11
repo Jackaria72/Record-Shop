@@ -89,4 +89,9 @@ public class RecordManagerServiceImpl implements RecordManagerService {
         album.assignArtist(artist);
         return recordManagerRepository.save(album);
     }
+
+    @Override
+    public List<Album> getByQuantityInStock(int quantity) {
+        return recordManagerRepository.findByQuantityInStockGreaterThan(quantity);
+    }
 }

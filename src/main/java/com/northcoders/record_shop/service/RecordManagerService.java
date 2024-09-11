@@ -12,4 +12,6 @@ public interface RecordManagerService {
     Album updateAlbumById(Album album, Long id);
     void deleteAlbumById(Long id);
     Album assignArtistToAlbum(Long albumId, Long artistId);
+    List<Album> getByQuantityInStock(int quantity);
+
 }
