@@ -1,6 +1,7 @@
 package com.northcoders.record_shop.controllers;
 
 import com.northcoders.record_shop.model.Album;
+import com.northcoders.record_shop.model.SuperGenre;
 import com.northcoders.record_shop.service.RecordManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -33,7 +34,11 @@ public class RecordManagerController {
         List<Album> albums = recordManagerService.getByQuantityInStock(1);
         return new ResponseEntity<>(albums, HttpStatus.OK);
     }
-
+    @GetMapping("/genre/{genre}")
+    public ResponseEntity<List<Album>> getAlbumByGenre(@PathVariable SuperGenre genre) {
+        List<Album> albums = recordManagerService.getByGenre(genre);
+        return new ResponseEntity<>(albums, HttpStatus.OK);
+    }
     @PostMapping
     public ResponseEntity<Album> addAlbum(@RequestBody Album record) {
         Album newRecord = recordManagerService.insertAlbum(record);
