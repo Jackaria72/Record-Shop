@@ -13,5 +13,5 @@ public interface RecordManagerRepository extends CrudRepository<Album, Long> {
     List<Album> findByQuantityInStockGreaterThan(int quantityInStock);
     List<Album> findByGenreIs(SuperGenre genre);
     List<Album> findByReleaseYearIs(int year);
-    Optional<Album> findByAlbumNameEquals(String albumName);
+    Optional<Album> findByAlbumName(String albumName);
 }

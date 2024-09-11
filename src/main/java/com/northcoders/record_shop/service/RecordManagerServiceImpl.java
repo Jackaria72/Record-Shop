@@ -105,4 +105,14 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     public List<Album> getByReleaseYear(int year) {
         return recordManagerRepository.findByReleaseYearIs(year);
     }
+
+    @Override
+    public Album getByAlbumName(String albumName) {
+        Optional<Album> optAlbum = recordManagerRepository.findByAlbumName(albumName);
+        if (optAlbum.isPresent()) {
+            return optAlbum.get();
+        } else {
+            throw new NotFoundException(String.format("The Album with the name '%s' cannot be found!", albumName));
+        }
+    }
 }

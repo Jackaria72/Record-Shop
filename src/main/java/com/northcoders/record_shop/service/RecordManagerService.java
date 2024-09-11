@@ -4,6 +4,7 @@ import com.northcoders.record_shop.model.Album;
 import com.northcoders.record_shop.model.SuperGenre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RecordManagerService {
 
@@ -16,5 +17,6 @@ public interface RecordManagerService {
     List<Album> getByQuantityInStock(int quantity);
     List<Album> getByGenre(SuperGenre genre);
     List<Album> getByReleaseYear(int year);
+    Album getByAlbumName(String albumName);
 
 }
