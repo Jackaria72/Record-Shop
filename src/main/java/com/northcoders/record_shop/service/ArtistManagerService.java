@@ -10,5 +10,6 @@ public interface ArtistManagerService {
     Artist getArtistById(Long id);
     Artist insertArtist(Artist artist);
     Artist updateArtistById(Long id, Artist artist);
+    void deleteArtistById(Long id);
 
 }

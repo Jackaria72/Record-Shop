@@ -51,4 +51,15 @@ public class ArtistManagerServiceImpl implements ArtistManagerService {
             throw new NotFoundException(String.format("The Artist with the id number '%s' cannot be found!", id));
         }
     }
+
+    @Override
+    public void deleteArtistById(Long id) {
+        Optional<Artist> artist = artistManagerRepository.findById(id);
+        if (artist.isPresent()) {
+            artistManagerRepository.deleteById(id);
+        } else {
+            throw new NotFoundException(String.format("The Artist with the id number '%s' cannot be found!", id));
+        }
+
+    }
 }
