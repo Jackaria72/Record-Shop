@@ -3,6 +3,7 @@ package com.northcoders.record_shop.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.northcoders.record_shop.exception.NotFoundException;
 import com.northcoders.record_shop.model.Album;
+import com.northcoders.record_shop.model.Artist;
 import com.northcoders.record_shop.model.SuperGenre;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,9 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.northcoders.record_shop.service.RecordManagerServiceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static java.util.Optional.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,10 +54,10 @@ class RecordManagerControllerTest {
     public void testGetAllAlbumsReturnsAlbums() throws Exception {
 
         List<Album> recordList = new ArrayList<>();
-        recordList.add(new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3));
-        recordList.add(new Album(2L, "Follow the Leader", "Korn", SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 1998, 2));
-        recordList.add(new Album(3L, "Nevermind", "Nirvana", SuperGenre.ALT_ROCK_AND_INDIE, "Placeholder", "Placeholder", 1991, 35));
-        recordList.add(new Album(4L, "Enema Of The State", "blink-182", SuperGenre.PUNK_WAVE, "Placeholder", "Placeholder", 1999, 1));
+        recordList.add(new Album(1L, "Vol.3: The Subliminal Verses", new Artist(1L, "Slipknot",null), SuperGenre.HEAVY_METAL,"Placeholder", "Placeholder", 2004, 3));
+        recordList.add(new Album(2L, "Follow the Leader", new Artist(2L, "Korn", null), SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder",  1998, 2));
+        recordList.add(new Album(3L, "Nevermind", new Artist(3L, "Nirvana", null), SuperGenre.ALT_ROCK_AND_INDIE, "Placeholder", "Placeholder", 1991, 35));
+        recordList.add(new Album(4L, "Enema Of The State", new Artist(4L, "blink-182", null), SuperGenre.PUNK_WAVE, "Placeholder", "Placeholder", 1999, 1));
 
         when(mockRecordServiceImpl.getAllAlbums()).thenReturn(recordList);
 
@@ -81,7 +80,7 @@ class RecordManagerControllerTest {
     public void testGetByIdReturnsAlbum() throws Exception {
 
         Long testId = 1L;
-        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", new Artist(1L, "Slipknot",null), SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
 
         when(mockRecordServiceImpl.getAlbumById(testId)).thenReturn(test1);
 
@@ -106,7 +105,8 @@ class RecordManagerControllerTest {
     @Test
     public void testPostMappingAddAnAlbum() throws Exception {
 
-        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
+        Set<Album> albums = new HashSet<>();
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", new Artist(1L, "Slipknot",albums), SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
 
         when(mockRecordServiceImpl.insertAlbum(test1)).thenReturn(test1);
 
@@ -122,8 +122,9 @@ class RecordManagerControllerTest {
     @Test
     public void testPutMappingUpdatesAnAlbum() throws Exception {
 
+        Set<Album> albums = new HashSet<>();
         Long id = 1L;
-        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", "Slipknot", SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
+        Album test1 = new Album(1L, "Vol.3: The Subliminal Verses", new Artist(1L, "Slipknot",albums), SuperGenre.HEAVY_METAL, "Placeholder", "Placeholder", 2004, 3);
 
         when(mockRecordServiceImpl.updateAlbumById(test1, id)).thenReturn(test1);
 
