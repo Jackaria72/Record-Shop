@@ -15,5 +15,6 @@ public interface RecordManagerService {
     Album assignArtistToAlbum(Long albumId, Long artistId);
     List<Album> getByQuantityInStock(int quantity);
     List<Album> getByGenre(SuperGenre genre);
+    List<Album> getByReleaseYear(int year);
 
 }

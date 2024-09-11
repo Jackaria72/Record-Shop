@@ -100,4 +100,9 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     public List<Album> getByGenre(SuperGenre genre) {
         return recordManagerRepository.findByGenreIs(genre);
     }
+
+    @Override
+    public List<Album> getByReleaseYear(int year) {
+        return recordManagerRepository.findByReleaseYearIs(year);
+    }
 }

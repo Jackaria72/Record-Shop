@@ -39,6 +39,11 @@ public class RecordManagerController {
         List<Album> albums = recordManagerService.getByGenre(genre);
         return new ResponseEntity<>(albums, HttpStatus.OK);
     }
+    @GetMapping("/year/{year}")
+    public ResponseEntity<List<Album>> getAlbumsByYear(@PathVariable int year) {
+        List<Album> albums = recordManagerService.getByReleaseYear(year);
+        return new ResponseEntity<>(albums, HttpStatus.OK);
+    }
     @PostMapping
     public ResponseEntity<Album> addAlbum(@RequestBody Album record) {
         Album newRecord = recordManagerService.insertAlbum(record);
