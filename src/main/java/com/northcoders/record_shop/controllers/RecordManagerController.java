@@ -28,6 +28,11 @@ public class RecordManagerController {
         Album record = recordManagerService.getAlbumById(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
+    @GetMapping("/in-stock")
+    public ResponseEntity<List<Album>> getAllAlbumsInStock() {
+        List<Album> albums = recordManagerService.getByQuantityInStock(1);
+        return new ResponseEntity<>(albums, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<Album> addAlbum(@RequestBody Album record) {
