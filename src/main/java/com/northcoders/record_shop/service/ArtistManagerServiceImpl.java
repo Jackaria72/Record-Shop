@@ -38,4 +38,17 @@ public class ArtistManagerServiceImpl implements ArtistManagerService {
     public Artist insertArtist(Artist artist) {
         return artistManagerRepository.save(artist);
     }
+
+    @Override
+    public Artist updateArtistById(Long id, Artist artist) {
+        Optional<Artist> original = artistManagerRepository.findById(id);
+        if (original.isPresent()) {
+            Artist update = original.get();
+            update.setArtistName(artist.getArtistName());
+
+            return artistManagerRepository.save(update);
+        } else {
+            throw new NotFoundException(String.format("The Artist with the id number '%s' cannot be found!", id));
+        }
+    }
 }

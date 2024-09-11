@@ -37,4 +37,10 @@ public class ArtistManagerController {
         httpHeaders.add("artist", "/api/v1/artist" + newArtist.getId().toString());
         return new ResponseEntity<>(newArtist, httpHeaders, HttpStatus.OK);
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Artist> updateArtist(@PathVariable Long id, @RequestBody Artist artist) {
+        Artist update = artistManagerService.updateArtistById(id, artist);
+        return new ResponseEntity<>(update, HttpStatus.NO_CONTENT);
+    }
 }
