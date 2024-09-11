@@ -22,7 +22,7 @@ public @Data class Album {
     @Column
     String albumName;
 
-    @Column
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "artist_id", referencedColumnName = "id")
     Artist artist;

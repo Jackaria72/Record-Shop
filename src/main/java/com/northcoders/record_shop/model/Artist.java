@@ -26,6 +26,6 @@ public @Data class Artist {
     String artistName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "artists")
+    @OneToMany(mappedBy = "artist")
     Set<Album> albums = new HashSet<>();
 }
