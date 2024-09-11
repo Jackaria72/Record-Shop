@@ -46,5 +46,12 @@ public class RecordManagerController {
         recordManagerService.deleteAlbumById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @PutMapping("/{albumId}/artist/{artistId}")
+    public ResponseEntity<Album> assignArtistToAlbum(
+            @PathVariable Long albumId,
+            @PathVariable Long artistId) {
+        Album assigned = recordManagerService.assignArtistToAlbum(albumId, artistId);
+        return new ResponseEntity<>(assigned, HttpStatus.NO_CONTENT);
+    }
 
 }

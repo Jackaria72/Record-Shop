@@ -1,6 +1,8 @@
 package com.northcoders.record_shop.service;
 
 import com.northcoders.record_shop.exception.NotFoundException;
+import com.northcoders.record_shop.model.Artist;
+import com.northcoders.record_shop.repository.ArtistManagerRepository;
 import com.northcoders.record_shop.repository.RecordManagerRepository;
 import com.northcoders.record_shop.model.Album;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class RecordManagerServiceImpl implements RecordManagerService {
 
     @Autowired
     RecordManagerRepository recordManagerRepository;
+
+    @Autowired
+    ArtistManagerRepository artistManagerRepository;
 
     @Override
     public List<Album> getAllAlbums() {
@@ -67,5 +72,21 @@ public class RecordManagerServiceImpl implements RecordManagerService {
         } else {
             throw new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", id));
         }
+    }
+
+    @Override
+    public Album assignArtistToAlbum(Long albumId, Long artistId) {
+        Optional<Album> optAlbum = recordManagerRepository.findById(albumId);
+        Optional<Artist> optArtist = artistManagerRepository.findById(artistId);
+        if (optAlbum.isEmpty()) {
+            throw new NotFoundException(String.format("The Album with the id number '%s' cannot be found!", albumId));
+        }
+        if (optArtist.isEmpty()) {
+            throw new NotFoundException(String.format("The Artist with the id number '%s' cannot be found!", artistId));
+        }
+        Album album = optAlbum.get();
+        Artist artist = optArtist.get();
+        album.assignArtist(artist);
+        return recordManagerRepository.save(album);
     }
 }

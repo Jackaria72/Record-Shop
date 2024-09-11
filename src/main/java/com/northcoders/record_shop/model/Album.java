@@ -42,4 +42,8 @@ public @Data class Album {
 
     @Column
     int quantityInStock;
+
+    public void assignArtist(Artist artist) {
+        this.artist = artist;
+    }
 }
