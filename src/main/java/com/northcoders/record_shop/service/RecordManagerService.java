@@ -1,6 +1,7 @@
 package com.northcoders.record_shop.service;
 
 import com.northcoders.record_shop.model.Album;
+import com.northcoders.record_shop.model.SuperGenre;
 
 import java.util.List;
 
@@ -13,5 +14,6 @@ public interface RecordManagerService {
     void deleteAlbumById(Long id);
     Album assignArtistToAlbum(Long albumId, Long artistId);
     List<Album> getByQuantityInStock(int quantity);
+    List<Album> getByGenre(SuperGenre genre);
 
 }

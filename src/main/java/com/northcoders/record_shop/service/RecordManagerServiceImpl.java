@@ -2,6 +2,7 @@ package com.northcoders.record_shop.service;
 
 import com.northcoders.record_shop.exception.NotFoundException;
 import com.northcoders.record_shop.model.Artist;
+import com.northcoders.record_shop.model.SuperGenre;
 import com.northcoders.record_shop.repository.ArtistManagerRepository;
 import com.northcoders.record_shop.repository.RecordManagerRepository;
 import com.northcoders.record_shop.model.Album;
@@ -93,5 +94,10 @@ public class RecordManagerServiceImpl implements RecordManagerService {
     @Override
     public List<Album> getByQuantityInStock(int quantity) {
         return recordManagerRepository.findByQuantityInStockGreaterThan(quantity);
+    }
+
+    @Override
+    public List<Album> getByGenre(SuperGenre genre) {
+        return recordManagerRepository.findByGenreIs(genre);
     }
 }
